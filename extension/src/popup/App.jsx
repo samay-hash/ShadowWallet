@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 const chrome = window.chrome;
-const BACKEND = 'http://localhost:3001';
+const BACKEND = 'https://shadowwallet-a28d.onrender.com';
 
 /* ── SVGs ────────────────────────────────────────────────────── */
 const Icons = {

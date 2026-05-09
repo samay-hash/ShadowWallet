@@ -1,7 +1,7 @@
 // ShadowWallet Background Service Worker
 // Manages shadow keypairs, session state, and API calls
 
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3001';
+const BACKEND_URL = process.env.BACKEND_URL || 'https://shadowwallet-a28d.onrender.com';
 const STORAGE_KEY = 'shadowwallet_state';
 
 // ─── Keypair Generation (Web Crypto, no Node deps) ───────────────────────────
