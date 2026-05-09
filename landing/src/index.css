@@ -171,20 +171,24 @@ p { color: var(--text-secondary); font-size: 1.1rem; }
 .btn-flip {
   position: relative;
   overflow: hidden;
-  height: 52px; /* Fixed height for flip effect */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  height: 54px; /* Slightly taller for premium feel */
+  padding: 0 !important;
 }
 
 .btn-flip span {
-  display: block;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 700;
 }
 
 .btn-flip .btn-flip-bottom {
-  position: absolute;
-  top: 100%;
+  transform: translateY(100%);
+  background: var(--accent-lime); /* Add a color change on flip */
+  color: #000;
 }
 
 .btn-flip:hover .btn-flip-top {
@@ -192,7 +196,7 @@ p { color: var(--text-secondary); font-size: 1.1rem; }
 }
 
 .btn-flip:hover .btn-flip-bottom {
-  transform: translateY(-100%);
+  transform: translateY(0);
 }
 
 /* ── Blue Glow Effect ──────────────────────────────────────────────────────── */
