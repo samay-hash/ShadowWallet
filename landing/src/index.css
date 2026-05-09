@@ -4,8 +4,8 @@
 :root {
   /* Creamy soft SaaS theme */
   --bg-base:       #f5f2eb;
-  --bg-surface:    #ffffff;
-  --bg-card:       #ffffff;
+  --bg-surface:    transparent;
+  --bg-card:       rgba(255, 255, 255, 0.4);
   
   --border:        rgba(0, 0, 0, 0.08);
   --border-strong: #1a1a1a;
@@ -104,10 +104,16 @@ p { color: var(--text-secondary); font-size: 1.1rem; }
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 32px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  border-color: rgba(214, 245, 66, 0.4);
 }
 
 /* ── Badges ─────────────────────────────────────────────────────────────────── */

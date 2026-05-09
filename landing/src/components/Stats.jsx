@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const STATS = [
-  { value: 12500, label: 'Shadow Wallets Created', suffix: '+' },
-  { value: 18.7, label: 'Protected Volume', prefix: '$', suffix: 'M+' },
-  { value: 174000, label: 'Malicious Txs Blocked', suffix: '+' },
-  { value: 99.9, label: 'AI Detection Rate', suffix: '%' }
+  { value: 42, label: 'Shadow Wallets Created', suffix: '' },
+  { value: 3450, label: 'Protected Volume', prefix: '$', suffix: '' },
+  { value: 32, label: 'Malicious Txs Blocked', suffix: '' },
+  { value: 98.5, label: 'AI Detection Rate', suffix: '%' }
 ];
 
 function AnimatedNumber({ value, prefix = '', suffix = '' }) {

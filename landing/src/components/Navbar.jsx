@@ -34,7 +34,7 @@ export default function Navbar({ onGetStarted }) {
         {/* Logo */}
         <a href="/" onClick={(e) => { e.preventDefault(); window.location.href = '/'; }} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, paddingLeft: 8 }}>
           <span style={{ fontWeight: 700, fontSize: 20, color: 'var(--text-primary)', letterSpacing: '-0.03em' }}>
-            shadow<span style={{ color: '#000', opacity: 0.5 }}>wallet</span>
+            times<span style={{ color: '#000', opacity: 0.5 }}>wall</span>
           </span>
         </a>
 
