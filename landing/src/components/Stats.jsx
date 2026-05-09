@@ -11,6 +11,7 @@ function AnimatedNumber({ value, prefix = '', suffix = '' }) {
   const [count, setCount] = useState(0);
   const nodeRef = useRef(null);
 
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
