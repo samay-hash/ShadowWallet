@@ -99,6 +99,7 @@ Return this exact JSON structure:
     "solChanges": "<estimated SOL change if detectable>",
     "tokenChanges": "<token changes if any>",
     "suspiciousElements": ["<element 1>"]
+
   }
 }`;
 
