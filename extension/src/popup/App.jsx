@@ -213,7 +213,7 @@ function WalletTab({ state, stats, reputation, activeTab, onActivate, onBurn, on
         ) : (
           <div style={{ padding: '20px 0' }}>
             <button className="btn btn-lime" style={{ padding: '16px 24px', fontSize: 15 }} onClick={onActivate}>
-              <Icons.Shield size={18} /> Activate Shadow Wallet
+              <Icons.Shield size={18} /> Activate TimesWall
             </button>
           </div>
         )}
@@ -232,7 +232,7 @@ function WalletTab({ state, stats, reputation, activeTab, onActivate, onBurn, on
             <button onClick={() => setShowReceiveModal(false)} style={{ position: 'absolute', top: 12, right: 12, background: 'none', border: 'none', color: 'var(--text-3)', cursor: 'pointer' }}>
               <Icons.X size={18} />
             </button>
-            <div style={{ fontSize: 16, fontWeight: 800, marginBottom: 8 }}>Fund Shadow Wallet</div>
+            <div style={{ fontSize: 16, fontWeight: 800, marginBottom: 8 }}>Fund TimesWall</div>
             <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 20, lineHeight: 1.5 }}>
               Send SOL from your main wallet to this burner address to safely interact with dApps.
             </div>
@@ -332,7 +332,7 @@ function WalletTab({ state, stats, reputation, activeTab, onActivate, onBurn, on
       {state?.isActive && (
         <div style={{ display: 'flex', gap: 10, paddingBottom: 16 }}>
           <button className="btn btn-ghost" style={{ flex: 1, fontSize: 12 }} onClick={onNewShadow}>
-            <Icons.Refresh size={14} /> New Shadow
+            <Icons.Refresh size={14} /> New TimesWall
           </button>
           <button className="btn btn-danger" style={{ flex: 1, fontSize: 12 }} onClick={onBurn}>
             <Icons.Flame size={14} /> Burn Wallet
@@ -376,7 +376,7 @@ function ActivityTab({ state }) {
               {item.type === 'blocked' ? <Icons.Shield size={18} /> : <Icons.Check size={18} />}
             </div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 13, fontWeight: 700 }}>{item.action}</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{item.action}</div>
               <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 2 }}>{item.site}</div>
             </div>
             <div style={{ fontSize: 10, color: 'var(--text-3)', fontWeight: 600 }}>{item.time}</div>
@@ -398,7 +398,7 @@ function SettingsTab({ state }) {
     { icon: <Icons.Shield size={18} />, title: 'Threat Registry', desc: 'Anchor Smart Contract Settings', action: null },
     { icon: <Icons.UserSecret size={18} />, title: 'Gemini AI Scans', desc: 'Configure strictness level', action: null },
     { icon: <Icons.Bell size={18} />, title: 'Notifications', desc: 'Alerts for high-risk txs', action: null },
-    { icon: <Icons.Alert size={18} />, title: 'About ShadowWallet', desc: 'v1.0.0 · Open Source · Local-First', action: () => setShowAbout(v => !v) },
+    { icon: <Icons.Alert size={18} />, title: 'About TimesWall', desc: 'v1.0.0 · Open Source · Local-First', action: () => setShowAbout(v => !v) },
     { icon: <Icons.ExternalLink size={18} />, title: 'Expanded View', desc: 'Open web dashboard', action: () => chrome.tabs.create({ url: 'https://timeswall.vercel.app' }) },
   ];
 
@@ -415,7 +415,7 @@ function SettingsTab({ state }) {
           <Icons.UserSecret size={24} />
         </div>
         <div>
-          <div style={{ fontSize: 14, fontWeight: 800 }}>Shadow Wallet Configuration</div>
+          <div style={{ fontSize: 14, fontWeight: 800 }}>TimesWall Configuration</div>
           <div style={{ fontSize: 11, color: 'var(--text-3)', marginTop: 2 }}>
             {state?.shadowWallet ? `Active: ${trunc(state.shadowWallet.publicKey, 6)}` : 'No active session'}
           </div>
@@ -439,7 +439,7 @@ function SettingsTab({ state }) {
       {showAbout && (
         <div className="card fade-in" style={{ padding: 16, marginTop: 12 }}>
           <div style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.7 }}>
-            <strong>ShadowWallet</strong> is an open-source Solana security shield.<br/>
+            <strong>TimesWall</strong> is an open-source Solana security shield.<br/>
             It creates ephemeral "shadow" burner wallets that shield your real identity from dApps.<br/>
             Every transaction is scanned by <strong>Gemini AI + Groq AI</strong> in real-time.<br/>
             Threats are permanently recorded to the Solana blockchain.<br/>
@@ -503,13 +503,13 @@ export default function App() {
   const handleActivate = async () => {
     setActionLoading(true);
     const res = await sendMsg({ type: 'ACTIVATE_SHADOW' });
-    if (res?.success) { showToast('Shadow wallet activated!', 'success'); await loadAll(); }
+    if (res?.success) { showToast('TimesWall activated!', 'success'); await loadAll(); }
     else showToast('Failed to activate', 'danger');
     setActionLoading(false);
   };
 
   const handleBurn = async () => {
-    if (!confirm('Burn this shadow wallet? Cannot be undone.')) return;
+    if (!confirm('Burn this TimesWall? Cannot be undone.')) return;
     setActionLoading(true);
     await sendMsg({ type: 'BURN_WALLET' });
     showToast('Wallet burned', 'warning');
@@ -520,7 +520,7 @@ export default function App() {
   const handleNewShadow = async () => {
     setActionLoading(true);
     const res = await sendMsg({ type: 'ACTIVATE_SHADOW' });
-    if (res?.success) showToast('New shadow wallet ready!', 'success');
+    if (res?.success) showToast('New TimesWall ready!', 'success');
     await loadAll();
     setActionLoading(false);
   };
@@ -537,7 +537,7 @@ export default function App() {
       <div style={{ height: 580, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
         <Icons.Shield size={48} color="var(--text-3)" />
         <div className="loading-bar" style={{ width: 160 }} />
-        <div style={{ fontSize: 12, color: 'var(--text-3)', fontWeight: 600 }}>Loading ShadowWallet...</div>
+        <div style={{ fontSize: 12, color: 'var(--text-3)', fontWeight: 600 }}>Loading TimesWall...</div>
       </div>
     );
   }
@@ -564,7 +564,7 @@ export default function App() {
             display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--lime)'
           }}><Icons.Shield size={16} /></div>
           <div>
-            <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.02em', color: 'var(--text)' }}>ShadowWallet</div>
+            <div style={{ fontSize: 14, fontWeight: 900, letterSpacing: '-0.02em', color: 'var(--text)' }}>TimesWall</div>
             <div style={{ fontSize: 9, color: 'var(--text-3)', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>Security Shield</div>
           </div>
         </div>

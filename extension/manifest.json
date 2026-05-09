@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "ShadowWallet — Solana Security Shield",
+  "name": "TimesWall — Solana Security Shield",
   "version": "1.0.0",
   "description": "AI-powered disposable wallet protection for Solana. Stay anonymous, stay safe.",
   "icons": {
@@ -17,7 +17,7 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     },
-    "default_title": "ShadowWallet"
+    "default_title": "TimesWall"
   },
   "background": {
     "service_worker": "background.js",

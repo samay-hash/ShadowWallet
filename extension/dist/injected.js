@@ -277,16 +277,12 @@
     </div>`;
   }
   function tryOverride(obj, key) {
-    if (!obj) return;
+    if (!obj || !obj[key]) return;
     try {
       const original = obj[key];
       if (original == null ? void 0 : original.isShadowWallet) return;
       const shadow = new ShadowWalletProvider(original);
-      Object.defineProperty(obj, key, {
-        value: shadow,
-        writable: false,
-        configurable: false
-      });
+      obj[key] = shadow;
     } catch (_) {
     }
   }

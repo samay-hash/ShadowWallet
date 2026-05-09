@@ -291,16 +291,14 @@
   // Works with Phantom, Backpack, Solflare, Glow, Brave Wallet, etc.
 
   function tryOverride(obj, key) {
-    if (!obj) return;
+    if (!obj || !obj[key]) return;
     try {
       const original = obj[key];
       if (original?.isShadowWallet) return; // already wrapped
+      
       const shadow = new ShadowWalletProvider(original);
-      Object.defineProperty(obj, key, {
-        value: shadow,
-        writable: false,
-        configurable: false,
-      });
+      // Safe assignment without locking the property to prevent browser crashes
+      obj[key] = shadow;
     } catch (_) {}
   }
 

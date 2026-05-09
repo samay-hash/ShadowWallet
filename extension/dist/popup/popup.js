@@ -7293,7 +7293,7 @@ function WalletTab({ state, stats, reputation, activeTab, onActivate, onBurn, on
         ] })
       ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { padding: "20px 0" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "btn btn-lime", style: { padding: "16px 24px", fontSize: 15 }, onClick: onActivate, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Shield, { size: 18 }),
-        " Activate Shadow Wallet"
+        " Activate TimesWall"
       ] }) })
     ] }),
     showReceiveModal && (state == null ? void 0 : state.shadowWallet) && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
@@ -7316,7 +7316,7 @@ function WalletTab({ state, stats, reputation, activeTab, onActivate, onBurn, on
       position: "relative"
     }, onClick: (e) => e.stopPropagation(), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setShowReceiveModal(false), style: { position: "absolute", top: 12, right: 12, background: "none", border: "none", color: "var(--text-3)", cursor: "pointer" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.X, { size: 18 }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 16, fontWeight: 800, marginBottom: 8 }, children: "Fund Shadow Wallet" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 16, fontWeight: 800, marginBottom: 8 }, children: "Fund TimesWall" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 12, color: "var(--text-3)", marginBottom: 20, lineHeight: 1.5 }, children: "Send SOL from your main wallet to this burner address to safely interact with dApps." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { background: "#fff", padding: 12, borderRadius: 12, display: "inline-block", marginBottom: 20 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
@@ -7392,7 +7392,7 @@ function WalletTab({ state, stats, reputation, activeTab, onActivate, onBurn, on
     (state == null ? void 0 : state.isActive) && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", gap: 10, paddingBottom: 16 }, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "btn btn-ghost", style: { flex: 1, fontSize: 12 }, onClick: onNewShadow, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Refresh, { size: 14 }),
-        " New Shadow"
+        " New TimesWall"
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "btn btn-danger", style: { flex: 1, fontSize: 12 }, onClick: onBurn, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Flame, { size: 14 }),
@@ -7429,7 +7429,7 @@ function ActivityTab({ state }) {
         justifyContent: "center"
       }, children: item.type === "blocked" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Shield, { size: 18 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Check, { size: 18 }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { flex: 1 }, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 13, fontWeight: 700 }, children: item.action }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 13, fontWeight: 700, color: "var(--text)" }, children: item.action }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 11, color: "var(--text-3)", marginTop: 2 }, children: item.site })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 10, color: "var(--text-3)", fontWeight: 600 }, children: item.time })
@@ -7443,7 +7443,7 @@ function SettingsTab({ state }) {
     { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Shield, { size: 18 }), title: "Threat Registry", desc: "Anchor Smart Contract Settings", action: null },
     { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.UserSecret, { size: 18 }), title: "Gemini AI Scans", desc: "Configure strictness level", action: null },
     { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Bell, { size: 18 }), title: "Notifications", desc: "Alerts for high-risk txs", action: null },
-    { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Alert, { size: 18 }), title: "About ShadowWallet", desc: "v1.0.0 · Open Source · Local-First", action: () => setShowAbout((v) => !v) },
+    { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Alert, { size: 18 }), title: "About TimesWall", desc: "v1.0.0 · Open Source · Local-First", action: () => setShowAbout((v) => !v) },
     { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.ExternalLink, { size: 18 }), title: "Expanded View", desc: "Open web dashboard", action: () => chrome.tabs.create({ url: "https://timeswall.vercel.app" }) }
   ];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fade-in", style: { padding: "16px 16px 80px" }, children: [
@@ -7460,7 +7460,7 @@ function SettingsTab({ state }) {
         color: "#000"
       }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.UserSecret, { size: 24 }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 14, fontWeight: 800 }, children: "Shadow Wallet Configuration" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 14, fontWeight: 800 }, children: "TimesWall Configuration" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 11, color: "var(--text-3)", marginTop: 2 }, children: (state == null ? void 0 : state.shadowWallet) ? `Active: ${trunc(state.shadowWallet.publicKey, 6)}` : "No active session" })
       ] })
     ] }),
@@ -7473,7 +7473,7 @@ function SettingsTab({ state }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { color: "var(--text-3)", fontSize: 16 }, children: "›" })
     ] }, row.title)) }),
     showAbout && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card fade-in", style: { padding: 16, marginTop: 12 }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { fontSize: 13, color: "var(--text-2)", lineHeight: 1.7 }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "ShadowWallet" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "TimesWall" }),
       " is an open-source Solana security shield.",
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
       'It creates ephemeral "shadow" burner wallets that shield your real identity from dApps.',
@@ -7541,13 +7541,13 @@ function App() {
     setActionLoading(true);
     const res = await sendMsg({ type: "ACTIVATE_SHADOW" });
     if (res == null ? void 0 : res.success) {
-      showToast("Shadow wallet activated!", "success");
+      showToast("TimesWall activated!", "success");
       await loadAll();
     } else showToast("Failed to activate", "danger");
     setActionLoading(false);
   };
   const handleBurn = async () => {
-    if (!confirm("Burn this shadow wallet? Cannot be undone.")) return;
+    if (!confirm("Burn this TimesWall? Cannot be undone.")) return;
     setActionLoading(true);
     await sendMsg({ type: "BURN_WALLET" });
     showToast("Wallet burned", "warning");
@@ -7557,7 +7557,7 @@ function App() {
   const handleNewShadow = async () => {
     setActionLoading(true);
     const res = await sendMsg({ type: "ACTIVATE_SHADOW" });
-    if (res == null ? void 0 : res.success) showToast("New shadow wallet ready!", "success");
+    if (res == null ? void 0 : res.success) showToast("New TimesWall ready!", "success");
     await loadAll();
     setActionLoading(false);
   };
@@ -7572,7 +7572,7 @@ function App() {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { height: 580, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Shield, { size: 48, color: "var(--text-3)" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "loading-bar", style: { width: 160 } }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 12, color: "var(--text-3)", fontWeight: 600 }, children: "Loading ShadowWallet..." })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 12, color: "var(--text-3)", fontWeight: 600 }, children: "Loading TimesWall..." })
     ] });
   }
   const TABS = [
@@ -7604,7 +7604,7 @@ function App() {
           color: "var(--lime)"
         }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Shield, { size: 16 }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 14, fontWeight: 900, letterSpacing: "-0.02em", color: "var(--text)" }, children: "ShadowWallet" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 14, fontWeight: 900, letterSpacing: "-0.02em", color: "var(--text)" }, children: "TimesWall" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 9, color: "var(--text-3)", fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase" }, children: "Security Shield" })
         ] })
       ] }),
