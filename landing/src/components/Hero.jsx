@@ -13,37 +13,43 @@ export default function Hero({ onGetStarted }) {
       }}>
         
         {/* Trusted Badge */}
-        <div className="badge animate-fadeUp" style={{ marginBottom: 40 }}>
-          TRUSTED BY 12,500+ WE3 USERS <span style={{ color: '#f59e0b', marginLeft: 6 }}>★★★★★</span>
+        <div className="badge badge-transparent animate-fadeUp" style={{ marginBottom: 40, border: 'none', background: 'transparent' }}>
+          TRUSTED BY 53 WEB3 USERS <span style={{ color: '#f59e0b', marginLeft: 6 }}>★★★★★</span>
         </div>
 
         {/* Headline */}
         <h1 className="animate-fadeUp" style={{ marginBottom: 24, animationDelay: '0.1s', opacity: 0 }}>
-          Skip the <span className="italic-serif" style={{ color: '#ff3366' }}>scams</span> and<br />
+          Skip the <span className="italic-serif" style={{ color: '#3b82f6' }}>scams</span> and<br />
           manage dApps safely.
         </h1>
 
-        {/* Subtitle */}
+        {/* Subtitle with Typewriter Effect */}
         <p className="animate-fadeUp" style={{ 
           marginBottom: 48, maxWidth: 650, 
-          animationDelay: '0.2s', opacity: 0, margin: '0 auto 48px' 
+          animationDelay: '0.2s', opacity: 0, margin: '0 auto 48px',
+          minHeight: '3.2em'
         }}>
           One extension to manage everything you need for Web3 safety. From temporary 
-          wallets to military-grade AI transaction scanning, ShadowWallet protects you in one place.
+          wallets to military-grade AI transaction scanning, TimesWall protects you in one place.
         </p>
 
-        {/* Buttons */}
+        {/* Buttons with Flip Animation */}
         <div className="animate-fadeUp" style={{ 
           display: 'flex', gap: 24, alignItems: 'center', justifyContent: 'center',
           marginBottom: 80, animationDelay: '0.3s', opacity: 0 
         }}>
-          <button onClick={onGetStarted} className="btn btn-primary" style={{ padding: '16px 36px', fontSize: 16 }}>
-            Get access
+          <button onClick={onGetStarted} className="btn btn-primary btn-flip" style={{ width: 160 }}>
+            <span className="btn-flip-top">Get access</span>
+            <span className="btn-flip-bottom">Get access</span>
           </button>
           <a href="#demo" className="btn btn-link" style={{ fontSize: 16 }}>
             View demo
           </a>
         </div>
+
+        {/* Blue Glow Background */}
+        <div className="blue-glow" style={{ top: '20%', left: '50%', transform: 'translate(-50%, -50%)' }}></div>
+
 
         {/* Mockup / Visual Area */}
         <div className="animate-fadeUp" style={{ 

@@ -21,14 +21,9 @@ export default function Navbar({ onGetStarted }) {
       display: 'flex', justifyContent: 'center', pointerEvents: 'none'
     }}>
       <nav style={{
-        background: 'rgba(255, 255, 255, 0.9)',
-        backdropFilter: 'blur(12px)',
-        border: '1px solid var(--border)',
-        borderRadius: 40,
-        padding: '8px 16px',
-        display: 'flex', alignItems: 'center', gap: 40,
+        background: 'transparent',
+        display: 'flex', alignItems: 'center', gap: 60,
         pointerEvents: 'auto',
-        boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.05)' : 'none',
         transition: 'all 0.3s ease',
       }}>
         {/* Logo */}
