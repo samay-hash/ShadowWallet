@@ -7444,7 +7444,7 @@ function SettingsTab({ state }) {
     { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.UserSecret, { size: 18 }), title: "Gemini AI Scans", desc: "Configure strictness level", action: null },
     { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Bell, { size: 18 }), title: "Notifications", desc: "Alerts for high-risk txs", action: null },
     { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.Alert, { size: 18 }), title: "About ShadowWallet", desc: "v1.0.0 · Open Source · Local-First", action: () => setShowAbout((v) => !v) },
-    { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.ExternalLink, { size: 18 }), title: "Expanded View", desc: "Open web dashboard", action: () => chrome.tabs.create({ url: "http://localhost:5173" }) }
+    { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.ExternalLink, { size: 18 }), title: "Expanded View", desc: "Open web dashboard", action: () => chrome.tabs.create({ url: "https://timeswall.vercel.app" }) }
   ];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fade-in", style: { padding: "16px 16px 80px" }, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 16, fontWeight: 800, marginBottom: 20 }, children: "Settings" }),
@@ -7619,7 +7619,7 @@ function App() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
-            onClick: () => chrome.tabs.create({ url: "http://localhost:5173" }),
+            onClick: () => chrome.tabs.create({ url: "https://timeswall.vercel.app" }),
             style: { background: "transparent", border: "none", cursor: "pointer", color: "var(--text-3)", display: "flex", alignItems: "center" },
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icons.ExternalLink, { size: 16 })
           }

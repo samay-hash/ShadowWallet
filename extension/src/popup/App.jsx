@@ -399,7 +399,7 @@ function SettingsTab({ state }) {
     { icon: <Icons.UserSecret size={18} />, title: 'Gemini AI Scans', desc: 'Configure strictness level', action: null },
     { icon: <Icons.Bell size={18} />, title: 'Notifications', desc: 'Alerts for high-risk txs', action: null },
     { icon: <Icons.Alert size={18} />, title: 'About ShadowWallet', desc: 'v1.0.0 · Open Source · Local-First', action: () => setShowAbout(v => !v) },
-    { icon: <Icons.ExternalLink size={18} />, title: 'Expanded View', desc: 'Open web dashboard', action: () => chrome.tabs.create({ url: 'http://localhost:5173' }) },
+    { icon: <Icons.ExternalLink size={18} />, title: 'Expanded View', desc: 'Open web dashboard', action: () => chrome.tabs.create({ url: 'https://timeswall.vercel.app' }) },
   ];
 
   return (
@@ -574,7 +574,7 @@ export default function App() {
               ? (() => { try { return new URL(activeTab.url).hostname.replace('www.', ''); } catch { return ''; } })()
               : ''}
           </div>
-          <button onClick={() => chrome.tabs.create({ url: 'http://localhost:5173' })}
+          <button onClick={() => chrome.tabs.create({ url: 'https://timeswall.vercel.app' })}
             style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-3)', display: 'flex', alignItems: 'center' }}>
             <Icons.ExternalLink size={16} />
           </button>
