@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0a0a0f;
+  --bg-card:   #111118;
+  --bg-hover:  #1a1a24;
+  --border:    rgba(255,255,255,0.06);
+  --border-strong: rgba(255,255,255,0.12);
+  --lime:      #d6f542;
+  --lime-dark: #b8d422;
+  --red:       #ff3366;
+  --green:     #00e5a0;
+  --amber:     #f59e0b;
+  --text:      #ffffff;
+  --text-2:    rgba(255,255,255,0.55);
+  --text-3:    rgba(255,255,255,0.28);
+  --radius:    16px;
+}
+
+html, body { width: 380px; min-height: 580px; overflow: hidden; }
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+@keyframes shimmer {
+  0%{background-position:-300% 0} 100%{background-position:300% 0}
+}
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+.fade-in { animation: fadeIn 0.25s cubic-bezier(0.16,1,0.3,1); }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 18px; border-radius: 40px; font-size: 13px; font-weight: 700;
+  cursor: pointer; border: none; transition: all 0.2s; font-family: inherit;
+  letter-spacing: -0.01em;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-lime {
+  background: var(--lime); color: #000;
+  box-shadow: 0 0 20px rgba(214,245,66,0.25);
+}
+.btn-lime:hover { background: var(--lime-dark); box-shadow: 0 0 30px rgba(214,245,66,0.35); }
+
+.btn-ghost {
+  background: rgba(255,255,255,0.07); color: var(--text);
+  border: 1px solid var(--border-strong);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+.btn-danger {
+  background: rgba(255,51,102,0.12); color: var(--red);
+  border: 1px solid rgba(255,51,102,0.25);
+}
+.btn-danger:hover { background: rgba(255,51,102,0.2); }
+
+/* ── Cards ───────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* ── Badge ───────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 40px;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.badge-safe    { background: rgba(0,229,160,0.12); color: var(--green); border: 1px solid rgba(0,229,160,0.25); }
+.badge-warning { background: rgba(245,158,11,0.12); color: var(--amber); border: 1px solid rgba(245,158,11,0.25); }
+.badge-danger  { background: rgba(255,51,102,0.12); color: var(--red);   border: 1px solid rgba(255,51,102,0.25); }
+
+/* ── Loading bar ─────────────────────────────────────────────── */
+.loading-bar {
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--lime) 50%, transparent 100%);
+  background-size: 300% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 1px;
+}
+
+/* ── Bottom Nav ──────────────────────────────────────────────── */
+.bottom-nav {
+  display: flex;
+  border-top: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.nav-btn {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; padding: 10px 4px 12px;
+  background: transparent; border: none; cursor: pointer; transition: all 0.2s;
+  font-family: inherit; font-size: 10px; font-weight: 600; color: var(--text-3);
+}
+.nav-btn:hover { color: var(--text-2); }
+.nav-btn.active { color: var(--lime); }
+.nav-btn .nav-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+  transition: background 0.2s;
+}
+.nav-btn.active .nav-icon { background: rgba(214,245,66,0.12); }
+
+/* ── Settings List ───────────────────────────────────────────── */
+.settings-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; border-radius: 12px;
+  cursor: pointer; transition: background 0.15s;
+}
+.settings-row:hover { background: var(--bg-hover); }
+.settings-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+
+/* ── Risk Graph ──────────────────────────────────────────────── */
+.risk-graph-bar {
+  transition: height 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* ── Toast ───────────────────────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+  padding: 10px 20px; border-radius: 40px; font-size: 12px; font-weight: 700;
+  white-space: nowrap; z-index: 9999; animation: fadeIn 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.toast-success { background: var(--green); color: #000; }
+.toast-warning { background: var(--amber); color: #000; }
+.toast-danger  { background: var(--red); color: #fff; }

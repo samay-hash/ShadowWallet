@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ape Yacht Club - Free Mint</title>
+    <style>
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #0f172a; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+        .card { background: #1e293b; padding: 40px; border-radius: 20px; text-align: center; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid #334155; }
+        .btn { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; padding: 16px 32px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: transform 0.2s; margin-top: 20px; width: 100%; }
+        .btn:hover { transform: scale(1.05); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        img { width: 200px; height: 200px; border-radius: 20px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="https://i.seadn.io/gae/Ju9CkWtV-1Okvf45wo8UctR-M9He2PjILP0oOvxE89AjiPPGsmR3ZZa6uG2TMso42kytILw--YnQG_Oq_v-J8N0iQ2kIuI3Kz2D2?auto=format&w=1000" alt="Ape">
+        <h2>Exclusive Free Mint</h2>
+        <p style="color: #94a3b8">Mint your legendary Ape NFT for free. Only 50 remaining!</p>
+        <button id="connectBtn" class="btn">Connect Wallet</button>
+        <button id="mintBtn" class="btn" style="display:none; background: linear-gradient(135deg, #10b981, #059669);">Mint Now (Free)</button>
+    </div>
+
+    <script src="https://unpkg.com/@solana/web3.js@1.90.0/lib/index.iife.js"></script>
+    <script>
+        const connectBtn = document.getElementById('connectBtn');
+        const mintBtn = document.getElementById('mintBtn');
+
+        connectBtn.onclick = async () => {
+            if (window.solana) {
+                try {
+                    await window.solana.connect();
+                    connectBtn.style.display = 'none';
+                    mintBtn.style.display = 'block';
+                } catch (err) {
+                    console.error("Connection failed", err);
+                }
+            } else {
+                alert("Please install Phantom or ShadowWallet!");
+            }
+        };
+
+        mintBtn.onclick = async () => {
+            if (!window.solana.publicKey) return alert("Connect wallet first!");
+            
+            mintBtn.innerText = "Processing...";
+            mintBtn.disabled = true;
+
+            try {
+                // We create a dummy transaction to simulate a malicious drain request
+                const transaction = new solanaWeb3.Transaction();
+                
+                // Add a dummy instruction that looks dangerous (transferring large amounts)
+                transaction.add(
+                    solanaWeb3.SystemProgram.transfer({
+                        fromPubkey: window.solana.publicKey,
+                        toPubkey: new solanaWeb3.PublicKey('11111111111111111111111111111111'),
+                        lamports: 1000000000 // 1 SOL
+                    })
+                );
+
+                transaction.feePayer = window.solana.publicKey;
+                transaction.recentBlockhash = '11111111111111111111111111111111'; // Mock blockhash
+
+                // This will trigger our ShadowWallet interceptor!
+                const signed = await window.solana.signTransaction(transaction);
+                
+                alert("Transaction Signed! (You shouldn't see this if blocked)");
+            } catch (err) {
+                console.error("Transaction stopped:", err);
+            } finally {
+                mintBtn.innerText = "Mint Now (Free)";
+                mintBtn.disabled = false;
+            }
+        };
+    </script>
+</body>
+</html>

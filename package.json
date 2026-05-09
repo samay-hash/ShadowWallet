@@ -1,0 +1,15 @@
+{
+  "name": "shadowwallet",
+  "version": "1.0.0",
+  "description": "ShadowWallet — AI-Powered Solana Security Shield",
+  "private": true,
+  "workspaces": ["backend", "extension", "landing"],
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix extension && npm install --prefix landing",
+    "dev:backend":  "npm run dev   --prefix backend",
+    "dev:extension":"npm run dev   --prefix extension",
+    "dev:landing":  "npm run dev   --prefix landing",
+    "build:extension": "npm run build --prefix extension",
+    "build:landing":   "npm run build --prefix landing"
+  }
+}
