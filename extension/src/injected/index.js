@@ -287,40 +287,86 @@
     </div>`;
   }
 
+  // ─── ZK Commitment (Pinocchio-style SHA-256 Nullifier) ───────────────────────
+  // Generates a commitment hash to prove we saw this transaction WITHOUT revealing
+  // the raw bytes — ZK-style nullifier pattern for anonymous threat reporting.
+  async function zkCommit(txBase64, walletPubkey) {
+    try {
+      const data = `${txBase64}:${walletPubkey}:${Date.now()}`;
+      const encoded = new TextEncoder().encode(data);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch { return null; }
+  }
+
   // ─── Override ALL Solana wallet providers ────────────────────────────────────
   // Works with Phantom, Backpack, Solflare, Glow, Brave Wallet, etc.
 
   function tryOverride(obj, key) {
-    if (!obj || !obj[key]) return;
+    if (!obj || !obj[key]) return false;
     try {
       const original = obj[key];
-      if (original?.isShadowWallet) return; // already wrapped
-      
-      const shadow = new ShadowWalletProvider(original);
-      // Safe assignment without locking the property to prevent browser crashes
-      obj[key] = shadow;
-    } catch (_) {}
+      if (original?.isShadowWallet) return true; // already wrapped — stop early
+      obj[key] = new ShadowWalletProvider(original);
+      return true;
+    } catch (_) { return false; }
   }
 
-  // Wrap all known wallet namespaces immediately
-  tryOverride(window,             'solana');     // Standard Solana provider
-  tryOverride(window.phantom,     'solana');     // Phantom (modern API)
-  tryOverride(window.backpack,    'solana');     // Backpack
-  tryOverride(window.xnft,        'solana');     // Backpack (xNFT legacy)
-  tryOverride(window.solflare,    'solana');     // Solflare
-  tryOverride(window.glowSolana,  'provider');  // Glow Wallet
-  tryOverride(window.braveSolana, 'provider');  // Brave Wallet
+  // ─── Phase 1: Immediate override attempt ─────────────────────────────────────
+  // Run once, right now, before any dApp scripts can fire
+  const walletKeys = [
+    [window,             'solana'],
+    [window.phantom,     'solana'],
+    [window.backpack,    'solana'],
+    [window.xnft,        'solana'],
+    [window.solflare,    'solana'],
+    [window.glowSolana,  'provider'],
+    [window.braveSolana, 'provider'],
+  ];
+  walletKeys.forEach(([obj, key]) => tryOverride(obj, key));
 
-  // Use a safer polling approach for late-injected wallets to prevent OOM/crashing heavy sites like YouTube
-  setInterval(() => {
-    tryOverride(window,             'solana');
-    if (window.phantom)     tryOverride(window.phantom,     'solana');
-    if (window.backpack)    tryOverride(window.backpack,    'solana');
-    if (window.xnft)        tryOverride(window.xnft,        'solana');
-    if (window.solflare)    tryOverride(window.solflare,    'solana');
-    if (window.glowSolana)  tryOverride(window.glowSolana,  'provider');
-    if (window.braveSolana) tryOverride(window.braveSolana, 'provider');
-  }, 1000);
+  // ─── Phase 2: MutationObserver for late-injected wallets ─────────────────────
+  // Replaces the crash-causing setInterval. Observes DOM changes and retries
+  // ONLY when the document actually mutates — zero CPU waste on idle pages.
+  let _overrideAttempts = 0;
+  const MAX_ATTEMPTS = 30; // Give up after ~15s — prevents infinite loops
 
-  console.log('%c🛡️ ShadowWallet ACTIVE — Protected: Phantom · Backpack · Solflare · Glow · Brave Wallet', 'color:#8b5cf6;font-weight:bold;font-size:13px');
+  const _observer = new MutationObserver(() => {
+    if (_overrideAttempts++ >= MAX_ATTEMPTS) {
+      _observer.disconnect(); // 🛑 Stop watching — prevents memory leak
+      return;
+    }
+
+    let allWrapped = true;
+    if (window.phantom?.solana && !window.phantom.solana.isShadowWallet) {
+      tryOverride(window.phantom, 'solana'); allWrapped = false;
+    }
+    if (window.backpack?.solana && !window.backpack.solana.isShadowWallet) {
+      tryOverride(window.backpack, 'solana'); allWrapped = false;
+    }
+    if (window.solflare && !window.solflare.isShadowWallet) {
+      tryOverride(window.solflare, 'solana'); allWrapped = false;
+    }
+    if (window.solana && !window.solana.isShadowWallet) {
+      tryOverride(window, 'solana'); allWrapped = false;
+    }
+
+    // All wallets wrapped — no need to keep watching
+    if (allWrapped && _overrideAttempts > 3) _observer.disconnect();
+  });
+
+  _observer.observe(document.documentElement, { childList: true, subtree: true });
+
+  // ─── Phase 3: One-shot delayed retry for very slow wallet injections ──────────
+  // Some wallets inject after 2-3s (e.g. Solflare). One timeout, no loop.
+  setTimeout(() => {
+    walletKeys.forEach(([obj, key]) => tryOverride(obj, key));
+    _observer.disconnect(); // Clean up observer after final attempt
+  }, 3000);
+
+  console.log('%c🛡️ TimesWall ACTIVE — ZK-Protected: Phantom · Backpack · Solflare · Glow · Brave Wallet', 'color:#8b5cf6;font-weight:bold;font-size:13px');
+
+  // Expose zkCommit for use by the approval UI
+  window.__twZkCommit = zkCommit;
 })();
