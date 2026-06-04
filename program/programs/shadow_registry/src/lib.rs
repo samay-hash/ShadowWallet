@@ -2,13 +2,7 @@ use anchor_lang::prelude::*;
 
 declare_id!("ShadWwzVmbX2x9x1RkX4R3vA1XvA8WkM9kRkX4R3vA1X");
 
-// ─── ZK Nullifier ─────────────────────────────────────────────────────────────
-// Implements a Pinocchio-style commitment scheme:
-// 1. Reporter generates:  commitment = SHA256(malicious_addr || nonce) off-chain
-// 2. They submit only the commitment on-chain (identity stays private)
-// 3. Later they can reveal (addr, nonce) to prove the report is theirs
-// This is a nullifier pattern used in Tornado Cash / Zcash style systems.
-
+ 
 #[program]
 pub mod shadow_registry {
     use super::*;
@@ -21,10 +15,7 @@ pub mod shadow_registry {
         Ok(())
     }
 
-    /// Submit a ZK-committed threat report.
-    /// `commitment` = SHA-256(malicious_address_bytes || nonce) — computed off-chain.
-    /// The actual malicious address is NOT stored — only the commitment hash.
-    /// This preserves reporter anonymity while still anchoring evidence on-chain.
+ 
     pub fn report_threat_zk(
         ctx: Context<ReportThreatZk>,
         commitment: [u8; 32],   // ZK nullifier: SHA256(addr || nonce)
@@ -37,12 +28,12 @@ pub mod shadow_registry {
         let report = &mut ctx.accounts.report;
         let registry = &mut ctx.accounts.registry;
 
-        // Only store the ZK commitment — NOT the reporter or malicious address
+ 
         report.commitment = commitment;
         report.threat_type = threat_type;
         report.risk_score = risk_score;
         report.timestamp = Clock::get()?.unix_timestamp;
-        // Nullifier prevents double-reporting the same (addr, nonce) pair
+ 
         report.nullifier_used = true;
 
         registry.total_reports += 1;
@@ -66,9 +57,7 @@ pub mod shadow_registry {
     ) -> Result<()> {
         let report = &ctx.accounts.report;
 
-        // Recompute SHA-256 of (address_bytes || nonce) using available primitives
-        // NOTE: Full on-chain SHA-256 requires syscall — here we store for off-chain verification
-        // Production: use solana_program::hash::hashv for Keccak or Light Protocol for full ZK
+  
         let expected_input = [malicious_address.as_ref(), &nonce].concat();
         let expected_hash = anchor_lang::solana_program::hash::hash(&expected_input);
 
